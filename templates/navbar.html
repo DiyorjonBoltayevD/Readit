@@ -1,0 +1,35 @@
+{% load static %}
+
+<nav class="navbar px-md-0 navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container">
+        <a class="navbar-brand" href="../index-2.html">Read<i>it</i>.</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+                aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="oi oi-menu"></span> Menu
+        </button>
+        <div class="collapse navbar-collapse" id="ftco-nav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active"><a href="{% url 'blog:home'%}" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="{% url 'blog:blog'%}" class="nav-link">Articles</a></li>
+                <li class="nav-item"><a href="{% url 'contact:contact'%}" class="nav-link">Contact</a></li>
+                {% if request.user.is_authenticated %}
+                <div class="user">
+                    {% if request.user.picture %}
+                    <img src="{{ request.user.picture.url }}" alt="user-image" width="50" class="user-image">
+                    {% else %}
+                    <img src="{% static 'images/user_image' %}" alt="user-image" width="50" class="user-image">
+                    {% endif %}
+                    <div class="userlogout">
+                        <h4>@{{request.user.username}}</h4>
+                        <a href="{% url 'blog:logout'%}">Logout</a>
+                    </div>
+                </div>
+                {% else %}
+
+                <a href="{% url 'blog:login'%}" class="nav-link">Login </a></li>
+                {% endif %}
+
+            </ul>
+        </div>
+    </div>
+</nav>
